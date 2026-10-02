@@ -5,7 +5,7 @@ const OUTPUT_SIZE = 423;
 const QR_VERSION = 6;
 const QUIET_ZONE_MODULES = 3;
 const DEFAULT_ADDRESS =
-  'ethereum:0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
+  '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
 
 const addressInput = document.querySelector('#address');
 const imageInput = document.querySelector('#image');
@@ -20,8 +20,7 @@ const downloadLink = document.querySelector('#download');
 let backgroundImage = null;
 let sourceObjectUrl = null;
 
-addressInput.value = '';
-addressInput.placeholder = DEFAULT_ADDRESS;
+addressInput.value = DEFAULT_ADDRESS;
 
 function getAddress() {
   const value = addressInput.value.trim();
