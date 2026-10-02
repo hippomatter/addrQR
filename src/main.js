@@ -9,8 +9,8 @@ const DEFAULT_ADDRESS =
 
 const addressInput = document.querySelector('#address');
 const imageInput = document.querySelector('#image');
-const dotShadeInput = document.querySelector('#dot-shade');
-const dotShadeValue = document.querySelector('#dot-shade-value');
+const imageLighteningInput = document.querySelector('#image-lightening');
+const imageLighteningValue = document.querySelector('#image-lightening-value');
 const generateButton = document.querySelector('#generate');
 const status = document.querySelector('#status');
 const sourceFrame = document.querySelector('#source-frame');
@@ -96,6 +96,9 @@ function drawOverlay() {
   const cropY = (backgroundImage.height - cropSize) / 2;
   context.fillStyle = '#fff';
   context.fillRect(0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
+  const lightening = Number(imageLighteningInput.value) / 100;
+  context.save();
+  context.filter = `brightness(${100 + lightening * 50}%)`;
   context.drawImage(
     backgroundImage,
     cropX,
@@ -107,10 +110,12 @@ function drawOverlay() {
     OUTPUT_SIZE,
     OUTPUT_SIZE,
   );
+  context.restore();
 
-  const shade = Math.round((Number(dotShadeInput.value) / 100) * 255);
-  const dotColor = `rgb(${shade} ${shade} ${shade})`;
-  context.fillStyle = dotColor;
+  context.fillStyle = `rgba(255, 255, 255, ${lightening * 0.45})`;
+  context.fillRect(0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
+
+  context.fillStyle = '#000';
   const quietZoneOffset = QUIET_ZONE_MODULES * moduleSize;
   for (let row = 0; row < moduleCount; row += 1) {
     for (let column = 0; column < moduleCount; column += 1) {
@@ -206,9 +211,8 @@ function renderOverlay() {
   setStatus('QR image generated.');
 }
 
-dotShadeInput.addEventListener('input', () => {
-  const shade = Number(dotShadeInput.value);
-  dotShadeValue.value = shade === 0 ? '0% · black' : `${shade}% toward white`;
+imageLighteningInput.addEventListener('input', () => {
+  imageLighteningValue.value = `${imageLighteningInput.value}%`;
   if (backgroundImage && getAddress() && !downloadLink.hidden) {
     try {
       renderOverlay();

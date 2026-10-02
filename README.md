@@ -2,9 +2,9 @@
 
 A browser-only tool for creating a 423 × 423 PNG with a high-error-correction
 Ethereum address QR over a center-cropped JPEG or PNG. The QR's white modules
-and quiet zone are transparent; its dark modules are opaque. Adjust the QR dot
-shade from black toward light gray with the slider (default black); the image
-background is not altered. Lighter dots may reduce scan reliability.
+and quiet zone are transparent; its black modules are opaque. Adjust the
+background lightening slider to brighten the image and lift dark tones toward
+white; the QR dots stay solid black.
 
 ## Run locally
 

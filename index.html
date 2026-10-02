@@ -52,20 +52,20 @@
         </p>
 
         <div class="range-header">
-          <label class="field-label" for="dot-shade">QR dot shade</label>
-          <output id="dot-shade-value" for="dot-shade">0% · black</output>
+          <label class="field-label" for="image-lightening">Background lightening</label>
+          <output id="image-lightening-value" for="image-lightening">20%</output>
         </div>
         <input
-          id="dot-shade"
-          name="dot-shade"
+          id="image-lightening"
+          name="image-lightening"
           type="range"
           min="0"
           max="80"
-          value="0"
-          aria-describedby="dot-shade-help"
+          value="20"
+          aria-describedby="image-lightening-help"
         />
-        <p class="field-help" id="dot-shade-help">
-          Move toward light gray to soften the black dots. Higher settings may make the QR harder to scan.
+        <p class="field-help" id="image-lightening-help">
+          Brightens the background and lifts dark tones toward white. QR dots stay solid black.
         </p>
 
         <button id="generate" type="button" disabled>Generate QR image</button>
