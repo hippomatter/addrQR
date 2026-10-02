@@ -9,8 +9,8 @@ const DEFAULT_ADDRESS =
 
 const addressInput = document.querySelector('#address');
 const imageInput = document.querySelector('#image');
-const brightnessInput = document.querySelector('#brightness');
-const brightnessValue = document.querySelector('#brightness-value');
+const dotShadeInput = document.querySelector('#dot-shade');
+const dotShadeValue = document.querySelector('#dot-shade-value');
 const generateButton = document.querySelector('#generate');
 const status = document.querySelector('#status');
 const sourceFrame = document.querySelector('#source-frame');
@@ -66,7 +66,7 @@ function loadImage(file) {
 function drawOverlay() {
   const address = getAddress();
   if (!address || !backgroundImage) {
-    throw new Error('Enter a valid Ethereum address and choose a JPEG image.');
+    throw new Error('Enter a valid Ethereum address and choose a JPEG or PNG image.');
   }
 
   const payload = `ethereum:${address}`;
@@ -96,8 +96,6 @@ function drawOverlay() {
   const cropY = (backgroundImage.height - cropSize) / 2;
   context.fillStyle = '#fff';
   context.fillRect(0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
-  context.save();
-  context.filter = `brightness(${brightnessInput.value}%)`;
   context.drawImage(
     backgroundImage,
     cropX,
@@ -109,9 +107,10 @@ function drawOverlay() {
     OUTPUT_SIZE,
     OUTPUT_SIZE,
   );
-  context.restore();
 
-  context.fillStyle = '#000';
+  const shade = Math.round((Number(dotShadeInput.value) / 100) * 255);
+  const dotColor = `rgb(${shade} ${shade} ${shade})`;
+  context.fillStyle = dotColor;
   const quietZoneOffset = QUIET_ZONE_MODULES * moduleSize;
   for (let row = 0; row < moduleCount; row += 1) {
     for (let column = 0; column < moduleCount; column += 1) {
@@ -207,8 +206,9 @@ function renderOverlay() {
   setStatus('QR image generated.');
 }
 
-brightnessInput.addEventListener('input', () => {
-  brightnessValue.value = `${brightnessInput.value}%`;
+dotShadeInput.addEventListener('input', () => {
+  const shade = Number(dotShadeInput.value);
+  dotShadeValue.value = shade === 0 ? '0% · black' : `${shade}% toward white`;
   if (backgroundImage && getAddress() && !downloadLink.hidden) {
     try {
       renderOverlay();

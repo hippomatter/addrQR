@@ -52,20 +52,20 @@
         </p>
 
         <div class="range-header">
-          <label class="field-label" for="brightness">Image brightness</label>
-          <output id="brightness-value" for="brightness">130%</output>
+          <label class="field-label" for="dot-shade">QR dot shade</label>
+          <output id="dot-shade-value" for="dot-shade">0% · black</output>
         </div>
         <input
-          id="brightness"
-          name="brightness"
+          id="dot-shade"
+          name="dot-shade"
           type="range"
-          min="100"
-          max="200"
-          value="130"
-          aria-describedby="brightness-help"
+          min="0"
+          max="80"
+          value="0"
+          aria-describedby="dot-shade-help"
         />
-        <p class="field-help" id="brightness-help">
-          Increase brightness to make the background lighter. QR dots stay solid black.
+        <p class="field-help" id="dot-shade-help">
+          Move toward light gray to soften the black dots. Higher settings may make the QR harder to scan.
         </p>
 
         <button id="generate" type="button" disabled>Generate QR image</button>
@@ -99,7 +99,7 @@
             <p class="empty-state">Your generated 423 × 423 QR image will appear here.</p>
           </div>
           <p class="field-help output-help">
-            QR Code Model 2 · version 6 · error correction H · black modules
+            QR Code Model 2 · version 6 · error correction H · dark modules
             only. Test the downloaded image with your intended wallet scanner.
           </p>
         </article>
