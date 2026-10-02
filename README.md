@@ -13,6 +13,11 @@ npm install
 npm run dev
 ```
 
+## Use the live app
+
+The app is published at <https://hippomatter.github.io/addrQR/>. GitHub Actions
+deploys the site to GitHub Pages whenever changes are pushed to `main`.
+
 Enter a 40-character hexadecimal Ethereum address (with or without the
 `ethereum:` prefix), select a JPEG or PNG, and choose **Generate QR image**. The
 application checks the address format but cannot determine whether an address
