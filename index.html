@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create a high error-correction address QR code over your own image."
+    />
+    <title>Address QR Overlay</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="page-header">
+        <p class="eyebrow">IMAGE TOOL</p>
+        <h1>Address QR overlay</h1>
+        <p class="intro">
+          Put a scannable Ethereum address QR over your image. The image shows
+          through the QR’s white spaces.
+        </p>
+      </header>
+
+      <section class="panel controls" aria-labelledby="setup-title">
+        <h2 id="setup-title">Create your image</h2>
+        <label class="field-label" for="address">Ethereum address</label>
+        <input
+          id="address"
+          name="address"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="ethereum:0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          aria-describedby="address-help"
+        />
+        <p class="field-help" id="address-help">
+          Enter a 0x address, optionally prefixed with ethereum:. Format is
+          checked; EOA status is not verified.
+        </p>
+
+        <label class="field-label" for="image">Background image (JPEG or PNG)</label>
+        <input
+          id="image"
+          name="image"
+          type="file"
+          accept="image/jpeg,image/png,.jpg,.jpeg,.png"
+          aria-describedby="image-help"
+        />
+        <p class="field-help" id="image-help">
+          The center of your image is cropped to a square and resized to 423 ×
+          423 pixels. PNG transparency is filled with white.
+        </p>
+
+        <div class="range-header">
+          <label class="field-label" for="brightness">Image brightness</label>
+          <output id="brightness-value" for="brightness">130%</output>
+        </div>
+        <input
+          id="brightness"
+          name="brightness"
+          type="range"
+          min="100"
+          max="200"
+          value="130"
+          aria-describedby="brightness-help"
+        />
+        <p class="field-help" id="brightness-help">
+          Increase brightness to make the background lighter. QR dots stay solid black.
+        </p>
+
+        <button id="generate" type="button" disabled>Generate QR image</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="previews" aria-label="Image previews">
+        <article class="panel preview-card">
+          <div class="preview-heading">
+            <div>
+              <p class="eyebrow">STEP 1</p>
+              <h2>Input image</h2>
+            </div>
+          </div>
+          <div class="image-frame" id="source-frame">
+            <p class="empty-state">Choose a JPEG or PNG image to preview it here.</p>
+          </div>
+        </article>
+
+        <article class="panel preview-card">
+          <div class="preview-heading">
+            <div>
+              <p class="eyebrow">STEP 2</p>
+              <h2>QR overlay</h2>
+            </div>
+            <a id="download" class="download" hidden download="address-qr-overlay.png">
+              Download PNG
+            </a>
+          </div>
+          <div class="image-frame output-frame" id="output-frame">
+            <p class="empty-state">Your generated 423 × 423 QR image will appear here.</p>
+          </div>
+          <p class="field-help output-help">
+            QR Code Model 2 · version 6 · error correction H · black modules
+            only. Test the downloaded image with your intended wallet scanner.
+          </p>
+        </article>
+      </section>
+
+      <footer>
+        Images are processed in your browser and are not uploaded.
+      </footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
